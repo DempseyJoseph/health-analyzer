@@ -327,25 +327,27 @@ export const useHealthAnalyzer = (parameters: {
           return;
         }
 
-        if (overallScoreHandle && res[overallScoreHandle] !== undefined) {
-          setClearOverallScore({ handle: overallScoreHandle, clear: res[overallScoreHandle] });
-          clearOverallScoreRef.current = { handle: overallScoreHandle, clear: res[overallScoreHandle] };
+        const resMap = res as Record<string, string | bigint | boolean>;
+
+        if (overallScoreHandle && resMap[overallScoreHandle] !== undefined) {
+          setClearOverallScore({ handle: overallScoreHandle, clear: resMap[overallScoreHandle] });
+          clearOverallScoreRef.current = { handle: overallScoreHandle, clear: resMap[overallScoreHandle] };
         }
-        if (cardioScoreHandle && res[cardioScoreHandle] !== undefined) {
-          setClearCardioScore({ handle: cardioScoreHandle, clear: res[cardioScoreHandle] });
-          clearCardioScoreRef.current = { handle: cardioScoreHandle, clear: res[cardioScoreHandle] };
+        if (cardioScoreHandle && resMap[cardioScoreHandle] !== undefined) {
+          setClearCardioScore({ handle: cardioScoreHandle, clear: resMap[cardioScoreHandle] });
+          clearCardioScoreRef.current = { handle: cardioScoreHandle, clear: resMap[cardioScoreHandle] };
         }
-        if (activityScoreHandle && res[activityScoreHandle] !== undefined) {
-          setClearActivityScore({ handle: activityScoreHandle, clear: res[activityScoreHandle] });
-          clearActivityScoreRef.current = { handle: activityScoreHandle, clear: res[activityScoreHandle] };
+        if (activityScoreHandle && resMap[activityScoreHandle] !== undefined) {
+          setClearActivityScore({ handle: activityScoreHandle, clear: resMap[activityScoreHandle] });
+          clearActivityScoreRef.current = { handle: activityScoreHandle, clear: resMap[activityScoreHandle] };
         }
-        if (sleepScoreHandle && res[sleepScoreHandle] !== undefined) {
-          setClearSleepScore({ handle: sleepScoreHandle, clear: res[sleepScoreHandle] });
-          clearSleepScoreRef.current = { handle: sleepScoreHandle, clear: res[sleepScoreHandle] };
+        if (sleepScoreHandle && resMap[sleepScoreHandle] !== undefined) {
+          setClearSleepScore({ handle: sleepScoreHandle, clear: resMap[sleepScoreHandle] });
+          clearSleepScoreRef.current = { handle: sleepScoreHandle, clear: resMap[sleepScoreHandle] };
         }
-        if (anomalyFlagHandle && res[anomalyFlagHandle] !== undefined) {
-          setClearAnomalyFlag({ handle: anomalyFlagHandle, clear: res[anomalyFlagHandle] });
-          clearAnomalyFlagRef.current = { handle: anomalyFlagHandle, clear: res[anomalyFlagHandle] };
+        if (anomalyFlagHandle && resMap[anomalyFlagHandle] !== undefined) {
+          setClearAnomalyFlag({ handle: anomalyFlagHandle, clear: resMap[anomalyFlagHandle] });
+          clearAnomalyFlagRef.current = { handle: anomalyFlagHandle, clear: resMap[anomalyFlagHandle] };
         }
       } finally {
         isDecryptingRef.current = false;
@@ -643,9 +645,11 @@ export const useHealthAnalyzer = (parameters: {
           return;
         }
 
+        const resMap = res as Record<string, string | bigint | boolean>;
+
         const getValue = (handle?: string): string | bigint | undefined => {
           if (!handle) return undefined;
-          const val = res[handle];
+          const val = resMap[handle];
           if (val === undefined || typeof val === 'boolean') return undefined;
           return val;
         };
