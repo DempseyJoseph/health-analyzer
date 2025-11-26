@@ -56,4 +56,7 @@ frontend/out/
 frontend/.env*
 
 
-.github/
+# Ignore .github contents except workflows
+.github/*
+!.github/workflows/
+!.github/workflows/**
