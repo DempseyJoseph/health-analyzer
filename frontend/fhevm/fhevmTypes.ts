@@ -1,9 +1,11 @@
-import type { FhevmInstance } from "@zama-fhe/relayer-sdk/bundle";
+import type { FhevmInstance, UserDecryptResults } from "@zama-fhe/relayer-sdk/bundle";
 import type { FhevmInstanceConfig } from "@zama-fhe/relayer-sdk/web";
 import type { HandleContractPair } from "@zama-fhe/relayer-sdk/bundle";
-import type { DecryptedResults } from "@zama-fhe/relayer-sdk/bundle";
 
-export type { FhevmInstance, FhevmInstanceConfig, HandleContractPair, DecryptedResults };
+export type { FhevmInstance, FhevmInstanceConfig, HandleContractPair };
+// Backward compatibility alias
+export type DecryptedResults = UserDecryptResults;
+export type { UserDecryptResults };
 
 export type FhevmDecryptionSignatureType = {
   publicKey: string;

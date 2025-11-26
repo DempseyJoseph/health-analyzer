@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig, Header } from "next";
 
 // Get basePath from environment variable, default to empty string
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -17,9 +17,31 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  
-  // Headers are not supported in static export
-  // They will be handled by GitHub Pages configuration if needed
+  // Runtime flags
+  reactStrictMode: true,
+  trailingSlash: true,
+
+  // Response headers for COOP/COEP and wasm content-type
+  async headers() {
+    const commonSecurityHeaders: Header[] = [
+      { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+      { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+    ];
+
+    return [
+      {
+        source: "/:path*",
+        headers: commonSecurityHeaders,
+      },
+      {
+        source: "/:path*.wasm",
+        headers: [
+          { key: "Content-Type", value: "application/wasm" },
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

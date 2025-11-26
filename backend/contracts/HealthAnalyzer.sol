@@ -2,12 +2,12 @@
 pragma solidity ^0.8.24;
 
 import {FHE, euint32, externalEuint32, ebool} from "@fhevm/solidity/lib/FHE.sol";
-import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title Health Analyzer - Encrypted Health Metrics Analysis System
 /// @notice A privacy-preserving health scoring system using Zama FHEVM
 /// @dev All health data is encrypted and computed in ciphertext state
-contract HealthAnalyzer is SepoliaConfig {
+contract HealthAnalyzer is ZamaEthereumConfig {
     // Health data structure for a user
     struct HealthRecord {
         euint32 heartRate;      // Encrypted heart rate (bpm)
